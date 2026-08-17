@@ -4,10 +4,6 @@ services:
       context: .
       dockerfile: backend/Dockerfile
     container_name: video-game-library-backend
-    environment:
-      APP_NAME: "Video Game Library"
-      APP_VERSION: "${APP_VERSION:-0.2.0}"
-      APP_PORT: "8000"
     ports:
       - "127.0.0.1:${BACKEND_PORT:-8000}:8000"
 
