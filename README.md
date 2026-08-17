@@ -26,8 +26,28 @@ The application supports basic CRUD operations and two theme-specific actions: M
 
 ## Start the project
 
+1. Download docker compose from official website.
+<a link="https://docs.docker.com/compose/install/">Install</a>
+
+2. Start docker after installation
+
+3. Run this command
+
 ```bash
 docker compose up -d --build
+```
+
+4. If docker fails with error.
+
+```
+bash: docker: command not found
+```
+
+</br>
+Windows: Open systemvariables. Go to Environment Variable and under Systemvariables open Path and add this line.
+
+```
+C:\Program Files\Docker\Docker\resources\bin
 ```
 
 Check the running containers:
@@ -36,7 +56,7 @@ Check the running containers:
 docker compose ps
 ```
 
-Stop the project:
+## Stop the project
 
 ```bash
 docker compose down
