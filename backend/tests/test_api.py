@@ -1,7 +1,5 @@
 from fastapi.testclient import TestClient
-
 from app.main import app
-
 
 client = TestClient(app)
 
@@ -39,7 +37,9 @@ def test_create_update_and_delete_item():
 
     update_response = client.put(f"/items/{item_id}", json=update_payload)
     assert update_response.status_code == 200
-    assert update_response.json()["title"] == "Updated item"
+    assert update_response.json() == {"id": item_id, "title": "Updated item", "genre": "Action RPG", "platform": "PC", "release_year": 2022, "status": "Playing", "rating": 8}
 
     delete_response = client.delete(f"/items/{item_id}")
     assert delete_response.status_code == 204
+
+
