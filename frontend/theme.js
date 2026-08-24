@@ -3,7 +3,7 @@ window.APP_CONFIG = {
   subtitle: "Organize games by genre, platform and release year.",
   entity: "game",
   plural: "games",
-  accent: "#6d28d9",
+  accent: "#d4000f", //BFO Red
   apiBaseUrl: "/api",
   fields: [
   {
