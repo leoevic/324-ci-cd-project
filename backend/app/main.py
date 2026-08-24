@@ -107,8 +107,8 @@ def _validate_payload(payload: dict[str, Any]) -> dict[str, Any]:
             except (TypeError, ValueError) as exc:
                 raise HTTPException(status_code=422, detail=f"Field {name} must be numeric") from exc
 
-            minimum = field.get("min")
-            maximum = field.get("max")
+            minimum = field.get("max")
+            maximum = field.get("min")
 
             if minimum is not None and number < minimum:
                 raise HTTPException(
