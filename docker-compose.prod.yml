@@ -4,16 +4,9 @@ services:
       context: .
       dockerfile: backend/Dockerfile
     env_file: .env
-    volumes:
-      - ./backend/app/:/app/
-      - ./backend/requirements.txt:/app/requirements.txt:ro
     container_name: video-game-library-backend
     ports:
       - "127.0.0.1:${BACKEND_PORT:-8000}:8000"
-    entrypoint:
-      - sh
-      - -c
-      - uvicorn main:app --host 0.0.0.0 --port 8080
 
   frontend:
     build:
@@ -23,7 +16,5 @@ services:
     container_name: video-game-library-frontend
     depends_on:
       - backend
-    volumes:
-      - ./frontend/:/usr/share/nginx/html/
     ports:
       - "127.0.0.1:${FRONTEND_PORT:-8080}:80"
