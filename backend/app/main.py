@@ -1,9 +1,9 @@
+#!/usr/bin/env python
 import os
 from typing import Any
 
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-
 
 APP_NAME = os.getenv("APP_NAME", "Video Game Library")
 APP_VERSION = os.getenv("APP_VERSION", "0.2.0")
