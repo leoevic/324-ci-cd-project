@@ -41,8 +41,9 @@ pipeline {
         stage('Build artifact') {
             steps {
                 sh '''
+                    source .env.example
                     mkdir -p evidence/artifacts
-                    zip -r evidence/artifacts/app-${BUILD_NUMBER}.zip \
+                    zip -r evidence/artifacts/app-${APP_VERSION}.zip \
                         backend frontend docker-compose.yml README.md
                 '''
             }
