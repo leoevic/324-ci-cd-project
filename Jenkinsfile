@@ -43,8 +43,7 @@ pipeline {
                 sh '''
                     source .env.example
                     mkdir -p evidence/artifacts
-                    zip -r evidence/artifacts/app-${APP_VERSION}.zip \
-                        backend frontend docker-compose.yml README.md
+                    tar -czf evidence/artifacts/app-${APP_VERSION}.tar.gz *
                 '''
             }
         }
@@ -54,7 +53,7 @@ pipeline {
         always {
             junit allowEmptyResults: true, testResults: 'evidence/reports/*.xml'
             archiveArtifacts(
-                artifacts: 'evidence/artifacts/*.zip,evidence/reports/*.xml',
+                artifacts: 'evidence/artifacts/*.tar.gz,evidence/reports/*.xml',
                 allowEmptyArchive: true,
                 fingerprint: true
             )
