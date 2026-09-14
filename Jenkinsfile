@@ -41,8 +41,9 @@ pipeline {
         stage('Build artifact') {
             steps {
                 sh '''
+                    source .env.example
                     mkdir -p evidence/artifacts
-                    tar -czf evidence/artifacts/app-${BUILD_NUMBER}.tar.gz *
+                    tar -czf evidence/artifacts/app-${APP_VERSION}.tar.gz *
                 '''
             }
         }
