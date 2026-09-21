@@ -41,9 +41,11 @@ pipeline {
         stage('Build artifact') {
             steps {
                 sh '''
-                    source .env.example
+                    GIT_COMMIT_HASH=$(git log -n 1 --pretty=format:'%H')
+                    chmod +x .env.example
+                    . ./.env.example
                     mkdir -p evidence/artifacts
-                    tar -czf evidence/artifacts/app-${APP_VERSION}.tar.gz *
+                    tar -czf evidence/artifacts/app-\${APP_VERSION}-\${BUILD_NUMBER}-\${GIT_COMMIT_HASH}.tar.gz *
                 '''
             }
         }
