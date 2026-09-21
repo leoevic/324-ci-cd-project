@@ -10,4 +10,5 @@ RUN jenkins-plugin-cli --plugins \
     workflow-aggregator \
     git \
     pipeline-stage-view \
-    junit
+    junit \
+    github
