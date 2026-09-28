@@ -8,31 +8,32 @@ pipeline {
             }
         }
 
-        stage('Install dependencies') {
-            steps {
-                sh '''
-                    python3 -m venv .venv
-                    . .venv/bin/activate
-                    pip install --upgrade pip --retries 10 --timeout 60
-                    pip install --retries 10 --timeout 60 -r backend/requirements.txt
-                '''
-            }
-        }
-
         stage('Lint') {
+            agent {
+                docker {
+                    image 'python:3.12-slim'
+                    reuseNode true
+                }
+            }
             steps {
                 sh '''
-                    . .venv/bin/activate
+                    pip install --retries 10 --timeout 60 ruff -r backend/requirements.txt
                     ruff check backend
                 '''
             }
         }
 
         stage('Test') {
+            agent {
+                docker {
+                    image 'python:3.12-slim'
+                    reuseNode true
+                }
+            }
             steps {
                 sh '''
+                    pip install --retries 10 --timeout 60 -r backend/requirements.txt pytest
                     mkdir -p evidence/reports
-                    . .venv/bin/activate
                     pytest backend/tests --junitxml=evidence/reports/tests.xml
                 '''
             }
