@@ -11,3 +11,6 @@ Store exported results and screenshots in `loadtest/results`.
 - Thread group 2 (runs afterwards): deletes the created items (IDs 4–23) again
 
 Run it headless with `just loadtest` (needs `jmeter` on the `PATH`). The backend is restarted first, so the IDs of the created items start at 4. The HTML report is written to `loadtest/results/report/index.html`.
+
+
+## JMeter Load Test 
