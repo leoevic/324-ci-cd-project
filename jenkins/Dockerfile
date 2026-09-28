@@ -11,4 +11,6 @@ RUN jenkins-plugin-cli --plugins \
     git \
     pipeline-stage-view \
     junit \
-    github
+    github \
+    github-branch-source \
+    http_request
