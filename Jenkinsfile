@@ -45,7 +45,7 @@ pipeline {
                     chmod +x .env.example
                     . ./.env.example
                     mkdir -p evidence/artifacts
-                    tar -czf --warning=no-file-changed evidence/artifacts/app-\${APP_VERSION}-\${BUILD_NUMBER}-\${GIT_COMMIT_HASH}.tar.gz *
+                    tar -czf evidence/artifacts/app-\${APP_VERSION}-\${BUILD_NUMBER}-\${GIT_COMMIT_HASH}.tar.gz --warning=no-file-changed *
                 '''
             }
         }
