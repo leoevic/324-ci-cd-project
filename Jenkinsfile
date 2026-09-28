@@ -22,8 +22,9 @@ pipeline {
         stage('Lint') {
             steps {
                 sh '''
+                    mkdir -p evidence/reports
                     . .venv/bin/activate
-                    ruff check backend
+                    ruff check backend --output-format junit > evidence/reports/lint.xml
                 '''
             }
         }
