@@ -13,8 +13,8 @@ pipeline {
                 sh '''
                     python3 -m venv .venv
                     . .venv/bin/activate
-                    pip install --upgrade pip
-                    pip install -r backend/requirements.txt
+                    pip install --upgrade pip --retries 10 --timeout 60
+                    pip install --retries 10 --timeout 60 -r backend/requirements.txt
                 '''
             }
         }
@@ -41,7 +41,7 @@ pipeline {
         stage('Build artifact') {
             steps {
                 sh '''
-                    source .env.example
+                    . ./.env.example
                     mkdir -p evidence/artifacts
                     tar -czf evidence/artifacts/app-${APP_VERSION}.tar.gz *
                 '''
