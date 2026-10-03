@@ -22,44 +22,25 @@ The application supports basic CRUD operations and two theme-specific actions: M
 - Docker or Docker Desktop
 - Docker Compose
 - Git
+- Just
 - A code editor
 
-## Start the project
+## Start the project in dev mode
 
-1. Download docker compose from official website.
-<a link="https://docs.docker.com/compose/install/">Install</a>
+1. Download the dependencies via the instructions on their respective official websites.
 
-2. Start docker after installation
+2. Make sure the docker daemon is running by executing `systemctl start dockerd`, `rc-service docker start` or by running the Docker Desktop app.
 
-3. Run this command
+3. In this project directory, run `just up` to build and start the containers.
 
-```bash
-docker compose up -d --build
-```
+4. If the docker command can't be found, make sure it's in the PATH variable
 
-4. If docker fails with error.
-
-```
-bash: docker: command not found
-```
-
-</br>
-Windows: Open systemvariables. Go to Environment Variable and under Systemvariables open Path and add this line.
-
-```
-C:\Program Files\Docker\Docker\resources\bin
-```
-
-Check the running containers:
-
-```bash
-docker compose ps
-```
+5. You can then verify that everything is running correctly by running `just open` to open the services website in your browser and using `docker compose ps`.
 
 ## Stop the project
 
 ```bash
-docker compose down
+just down
 ```
 
 ## Local configuration
@@ -72,15 +53,18 @@ cp .env.example .env
 
 Do not commit real secrets.
 
-## Useful backend commands
-
+## Other useful testing commands
+Commands for testing, linting, running and more are defined in `justfile`
+You can see an overview of existing commands by just running `just`:
 ```bash
-cd backend
-python -m venv .venv
-. .venv/bin/activate
-pip install -r requirements.txt
-pytest
-ruff check .
+❯ just
+Available recipes:
+    build         # Build all containers
+    default
+    down          # Stop all containers
+    fresh         # Rebuild and restart all containers
+    lint          # Lint backend with ruff
+[crop]
 ```
 
 ## Main API endpoints
@@ -97,15 +81,17 @@ POST   /items/{item_id}/actions/{action_id}
 ## Repository structure
 
 ```text
-frontend/
-backend/
-docs/
-evidence/
-loadtest/
-deployment/
-Jenkinsfile
-docker-compose.yml
-README.md
+frontend/               # Frontend code
+backend/                # Backend code
+docs/                   # Documentation
+evidence/               # Evidence for various tests
+loadtest/               # Code for loadtesting
+deployment/             # Deployment notes
+Jenkinsfile             # CI/CD definition
+justfile                # Definition of short-commands
+docker-compose.yml      # Developement-env compose file
+docker-compose.prod.yml # Production-env compose file
+README.md               # This file :>
 ```
 
 
