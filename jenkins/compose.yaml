@@ -1,0 +1,27 @@
+name: 324-jenkins
+services:
+  jenkins:
+    user: 1000:1000
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      JAVA_OPTS: -Djenkins.install.runSetupWizard=false
+    mem_limit: "2147483648"
+    networks:
+      default: null
+    ports:
+      - mode: ingress
+        host_ip: 127.0.0.1
+        target: 8080
+        published: "4324"
+        protocol: tcp
+    volumes:
+      - type: bind
+        source: ./jenkins_home
+        target: /var/jenkins_home
+        bind: {}
+
+networks:
+  default:
+    name: 324-jenkins_default
